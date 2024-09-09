@@ -1,5 +1,5 @@
 import pymysql
-from variables import zone, curve
+from variables import curve
 
 zone_dict = {
     'CAPITL': 'f',
@@ -38,7 +38,19 @@ reverse_zone_dict = {
 }
 
 
+
+
+# query_zone = reverse_zone_dict[zone]
+
 selected_curve = curve
+
+# lbmp_query = f"SELECT Time_Stamp, Year, Month, Day, Hour, Name, LBMP FROM nyiso.lbmp WHERE Name='{query_zone}'"
+#
+# curve_query = f"SELECT Month, Day, Hour, {selected_curve} AS Production FROM nyiso.curves;"
+
+# icap_query = f"SELECT Year, Month, {utility}_ICAP AS ICAP FROM nyiso.icap;"
+#
+# drv_query = f"SELECT Month, Day, Hour, {utility} AS DRV FROM nyiso.drv;"
 
 connection = pymysql.connect(
         user='admin',
@@ -55,5 +67,17 @@ utility_line_loss = {
 'ORU':1.0789
 }
 
+icap_line_loss = {
+    'NYSEG': 1.0738,
+    'NG': 1.084,
+    'CHUD': 1.0264,
+    'ORU': 1.098
+}
 
+
+drv_by_utility = {
+    'NYSEG': 0.08870,
+    'ORU': 0.22180,
+    'NG': 0.21080
+}
 
