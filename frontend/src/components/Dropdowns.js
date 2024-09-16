@@ -12,7 +12,7 @@ const Dropdowns = ({ onUpdate }) => {
     'South_Main_St_1', 'South_Main_St_2', 'State_Hgwy_17_Hancock',
     'State_Highway_17C', 'Weaver_Rd_Rosa'
 ];
-    const utilities = ['NYSEG', 'ORU', 'CHUD', 'NG'];
+    const utilities = ['NYSEG', 'ORU', 'NG'];
 
     const [selectedZone, setSelectedZone] = useState(zones[0]);
     const [selectedCurve, setSelectedCurve] = useState(curves[0]);

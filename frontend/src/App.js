@@ -24,8 +24,11 @@ const App = () => {
   };
 
   const getOrderedKeys = (data) => {
-    const keys = Object.keys(data[0]);
-    const orderedKeys = ['Time_Stamp', ...keys.filter(key => key !== 'Time_Stamp')];
+    const columnOrder = ['Time_Stamp', 'LBMP', 'DRV', 'ENV', 'ICAP', 'Value_Stack', 'Discount_Value_Stack', '12 month lookback', '24 month lookback'];
+
+    // Ensure that only columns that exist in the result are rendered
+    const availableKeys = Object.keys(data[0]);
+    const orderedKeys = columnOrder.filter(key => availableKeys.includes(key));
     return orderedKeys;
   };
 
