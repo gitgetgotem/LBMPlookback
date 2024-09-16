@@ -36,9 +36,23 @@ def get_data_from_db(connection, query):
     cursor.close()
     return pd.DataFrame(result)
 
+# def merge_lbmp_and_curve(df1, df2):
+#     df = pd.merge(df1, df2, on=['Month', 'Day', 'Hour'], how='left')
+#     return df
+
 def merge_lbmp_and_curve(df1, df2):
-    df = pd.merge(df1, df2, on=['Month', 'Day', 'Hour'], how='left')
+    # Create a copy of df2 to avoid modifying the original
+    df2_shifted = df2.copy()
+
+    # Shift the hour for months from March (3) to November (11)
+    dst_months = df2_shifted['Month'].between(3, 11)
+    df2_shifted.loc[dst_months, 'Hour'] = df2_shifted['Hour'] + 1
+
+    # Merge the DataFrames
+    df = pd.merge(df1, df2_shifted, on=['Month', 'Day', 'Hour'], how='left')
+
     return df
+
 
 
 def merge_df_and_drv(df1, df2):
