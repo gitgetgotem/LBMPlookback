@@ -35,7 +35,7 @@ const App = () => {
   return (
     <div className="container">
       <div className="dropdown-container">
-        <h1>LBMP Lookback</h1>
+        <h1>Value Stack</h1>
         <Dropdowns onUpdate={handleUpdate} />
       </div>
       {result && (
