@@ -6,6 +6,7 @@ const App = () => {
   const [result, setResult] = useState(null);
 
   const handleUpdate = async (zone, curve, utility) => {
+      console.log("TEST")
     const response = await fetch('http://127.0.0.1:5000/update', {
         method: 'POST',
         headers: {
@@ -13,6 +14,9 @@ const App = () => {
         },
         body: JSON.stringify({ zone, curve, utility }),
     });
+
+      console.log("BACkeND RESPONSE:")
+      console.log(response)
 
     if (!response.ok) {
         console.error("Error:", response.statusText);
