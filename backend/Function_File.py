@@ -29,12 +29,22 @@ def divide_last_column(df):
 
 
 
-def get_data_from_db(connection, query):
-    cursor = connection.cursor(pymysql.cursors.DictCursor)
-    cursor.execute(query)
-    result = cursor.fetchall()
-    cursor.close()
-    return pd.DataFrame(result)
+def get_data_from_db(connection, query, retries=3):
+    attempt = 0
+    while attempt < retries:
+        try:
+            cursor = connection.cursor(pymysql.cursors.DictCursor)
+            cursor.execute(query)
+            result = cursor.fetchall()
+            return pd.DataFrame(result)
+        except pymysql.MySQLError as e:
+            print(f"Query attempt {attempt + 1} failed: {e}")
+            attempt += 1
+            if attempt >= retries:
+                raise
+        finally:
+            cursor.close()
+
 
 # def merge_lbmp_and_curve(df1, df2):
 #     df = pd.merge(df1, df2, on=['Month', 'Day', 'Hour'], how='left')
