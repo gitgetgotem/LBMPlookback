@@ -6,7 +6,9 @@ from flask_cors import CORS
 import pandas as pd
 
 app = Flask(__name__)
-CORS(app)
+CORS(app) #########
+############ IF INSTANCE IP CHANGES, THIS WILL NEED TO BE UPDATED IN AWS
+############
 
 # Global variables to hold selected values
 zone = 'c'  # Default value
